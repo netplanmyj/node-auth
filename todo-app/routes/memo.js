@@ -5,7 +5,6 @@ var sqlite3 = require('sqlite3');
 
 //データベースオブジェクトの取得
 // const db = new sqlite3.Database('memo_data.sqlite3');
-
 const db = new sqlite3.Database("./memo_data.db", (err) => {
     if (err) {
         console.error("database error: " + err.message);
