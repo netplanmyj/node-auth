@@ -40,6 +40,6 @@ router.post('/', function (req, res, next) {
 });
 
 router.use('/signup', require('./signup'));
-router.use('/signon', require('./signon'));
+router.use('/login', require('./login'));
 
 module.exports = router;

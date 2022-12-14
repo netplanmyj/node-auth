@@ -3,8 +3,8 @@ const knex = require('../db/knex');
 const router = express.Router();
 
 router.get('/', function (req, res, next) {
-  res.render("signon", {
-    title: "Sign on",
+  res.render("login", {
+    title: "Login",
   });
 });
 
@@ -20,8 +20,8 @@ router.post('/', function (req, res, next) {
     .select("*")
     .then((results) => {
       if (results.length === 0) {
-        res.render("signon", {
-          title: "Sign on",
+        res.render("login", {
+          title: "Login",
           errorMessage: ["ユーザが見つかりません"],
         });
       } else {
@@ -31,8 +31,8 @@ router.post('/', function (req, res, next) {
     })
     .catch(function (err) {
       console.error(err);
-      res.render("signon", {
-        title: "Sign on",
+      res.render("login", {
+        title: "Login",
         errorMessage: [err.sqlMessage],
       });
     });
