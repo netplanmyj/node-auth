@@ -1,7 +1,6 @@
 -- SQLite
 create table users (
-  id int unsigned auto_increment not null,
+  id integer primary key AUTOINCREMENT,
   name varchar(255) unique,
-  password varchar(255),
-  PRIMARY KEY (id)
+  password varchar(255)
 );

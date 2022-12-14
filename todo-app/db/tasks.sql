@@ -1,6 +1,5 @@
 create table tasks (
-    id integer AUTO_INCREMENT,
+    id integer primary key AUTOINCREMENT,
     user_id int not null, 
-    content varchar(255) not null, 
-    PRIMARY KEY (id)
+    content varchar(255) not null
 );
