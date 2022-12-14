@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const knex = require('../db/knex');
 const sqlite3 = require('sqlite3');
 
 const db = new sqlite3.Database("./memo_data.db", (err) => {
@@ -11,26 +12,35 @@ const db = new sqlite3.Database("./memo_data.db", (err) => {
 });
 
 router.get('/', function (req, res, next) {
-  db.all(
-    "select * from tasks;",
-    (error, results) => {
-      console.log(error);
+  knex("tasks")
+    .select("*")
+    .then(function (results) {
       console.log(results);
       res.render('index', {
         title: 'ToDo App',
         todos: results,
       });
-    }
-  );
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.render('index', {
+        title: 'ToDo App',
+      });
+    });
 });
 
 router.post('/', function (req, res, next) {
   const todo = req.body.add;
-  db.run(
-    'insert into tasks (user_id, content) values (?, ?)', 1, todo,
-    (error, results) => {
-      console.log(error);
-      res.redirect('/');
+  knex("tasks")
+    .insert({user_id: 1, content: todo})
+    .then(function () {
+      res.redirect('/')
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.render('index', {
+        title: 'ToDo App',
+      });
     });
 });
 
