@@ -1,15 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
-const sqlite3 = require('sqlite3');
-
-const db = new sqlite3.Database("./memo_data.db", (err) => {
-  if (err) {
-    console.log('error connecting: ' + err.stack);
-    return
-  }
-  console.log('success');
-});
 
 router.get('/', function (req, res, next) {
   knex("tasks")
